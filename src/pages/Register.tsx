@@ -41,8 +41,6 @@ const Register = () => {
     }
   });
 
-
-
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     registerMutation.mutate({ username, password });

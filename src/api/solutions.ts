@@ -20,3 +20,4 @@ export const deleteSolutionRequest = async (solution_id: number): Promise<QuizSo
   const response = await authAxios.delete(`/quizes/solutions/delete/${solution_id}`);
   return response.data; 
 };
+

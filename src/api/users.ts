@@ -1,10 +1,10 @@
 import { useAuthStore } from "../store/auth";
-import { axi } from "./useAxios";
+import { authAxios, axi } from "./useAxios";
 
 
 export const registerRequest = async (username: string, password: string) => {
     try {
-         const response = await axi.post("/auth/register/", {username, password})
+         const response = await authAxios.post("/auth/register/", {username, password})
     return response.data;} catch (error) {
         console.log(error);
     }

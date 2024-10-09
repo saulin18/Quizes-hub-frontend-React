@@ -35,10 +35,6 @@ const router = createBrowserRouter([
         path: "/quizes/solutions/:id",
         element: <CreateSolution />,
       },
-      {
-        path: "/quizes/solutions/delete/:id",
-        element: <DeleteSolution />,
-      }
     ],
     
   },

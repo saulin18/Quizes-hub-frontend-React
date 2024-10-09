@@ -38,6 +38,7 @@ const CreateSolution = () => {
     const quiz = quizes.find(quiz => quiz.id === Number(id));
     if (quiz) {
       quiz.solutions.push(solution);
+      toast.success("Solución añadida con éxito!");
 
     }
   };
