@@ -12,7 +12,7 @@ import Register from "./pages/Register";
 import QuizesPage from "./pages/QuizesPage";
 import QuizCreate from "./pages/QuizCreate";
 import CreateSolution from "./pages/CreateSolution";
-import DeleteSolution from './pages/DeleteSolution';
+
 
 const router = createBrowserRouter([
   {
