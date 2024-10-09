@@ -3,11 +3,13 @@ import { useMutation } from '@tanstack/react-query';
 import { createSolutionRequest } from '../api/solutions';
 import { toast } from 'sonner';
 import { useSolutionsStore } from '../store/solutions';
+import { useQuizesStore } from '../store/quizes';
 
 const CreateSolution = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const { setSolutions } = useSolutionsStore(); 
+  const { quizes } = useQuizesStore();
 
   const createSolutionMutation = useMutation({
     mutationFn: (content: string) => createSolutionRequest(Number(id), content),
@@ -27,6 +29,17 @@ const CreateSolution = () => {
     const formData = new FormData(e.currentTarget);
     const content = formData.get('content') as string;
     createSolutionMutation.mutate(content);
+    addSolutionToAQuiz({ content, id: Number(id) });
+
+  };
+
+  const addSolutionToAQuiz = ({ content, id }: { content: string; id: number }) => {
+    const solution  = { content, id, quiz_id: Number(id) };
+    const quiz = quizes.find(quiz => quiz.id === Number(id));
+    if (quiz) {
+      quiz.solutions.push(solution);
+
+    }
   };
 
   return (

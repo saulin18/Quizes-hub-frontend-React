@@ -1,5 +1,5 @@
-import { Card, CardContent, Typography, Stack } from '@mui/material';
-import { Quiz, QuizSolution } from '../types-d';
+import { Card, CardContent, Typography } from '@mui/material';
+import { Quiz } from '../types-d';
 import { Link } from 'react-router-dom';
 
 interface QuizItemProps {
@@ -26,20 +26,7 @@ const QuizItem: React.FC<QuizItemProps> = ({ quiz }) => {
         )}
       </CardContent>
 
-      {quiz.solutions.length > 0 && (
-        <Stack direction="column" spacing={1} sx={{ mt: 2 }}>
-          {quiz.solutions.map((solution: QuizSolution) => (
-           
-            <p key={solution.id}>{solution.content}</p>
-          ))}
-        </Stack>
-      )}
-
-      {quiz.solutions.length === 0 && (
-        <Typography variant="body2" color="text.secondary" sx={{ mt: 2, ml: 2 }}>
-          No hay soluciones para este quiz
-        </Typography>
-      )}
+      
       
       <Link to={`/quizes/solutions/${quiz.id}`} className="text-center text-xl ml-2 font-bold text-primary-800">
         Create Solution

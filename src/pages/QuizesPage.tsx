@@ -1,10 +1,11 @@
-import QuizesList from "../components/QuizesList"
-
+import QuizesList from "../components/QuizesList";
+//import { useEffect } from "react";
+//import { useQuizesStore } from "../store/quizes";
 
 function QuizesPage() {
-  return (
-      <QuizesList />
-  )
+  
+
+  return <QuizesList />;
 }
 
-export default QuizesPage
+export default QuizesPage;

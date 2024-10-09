@@ -1,12 +1,16 @@
 
+import { QueryFunction } from "@tanstack/react-query";
 import { useQuizesStore } from "../store/quizes";
 
 import { Quiz } from "../types-d";
 import { authAxios, axi } from "./useAxios";
 
-export const getQuizesRequest = async (): Promise<Quiz[]> => {
-    const response = await axi.get<Quiz[]>("/quizes/"); 
-  return response.data; }
+
+
+export const getQuizesRequest: QueryFunction<Quiz[]> = async () => {
+  const response = await axi.get('/quizes/');
+  return response.data;
+};
     
 
   export const createQuizeRequest = async (quiz: { title: string; description: string }): Promise<Quiz> => {

@@ -10,6 +10,7 @@ type Actions = {
     setSolutions: (solutions: QuizSolution[]) => void;
     addSolution: (solution: QuizSolution) => void;
     updateSolution: (solution: QuizSolution) => void;
+    deleteSolution: (solution: QuizSolution) => void;
 };
 
 export const useSolutionsStore = create(
@@ -19,6 +20,7 @@ export const useSolutionsStore = create(
             setSolutions: (solutions: QuizSolution[]) => set(() => ({ solutions })),
             addSolution: (solution: QuizSolution) => set((state) => ({ solutions: [...state.solutions, solution] })),
             updateSolution: (solution: QuizSolution) => set((state) => ({ solutions: state.solutions.map((s) => s.id === solution.id ? solution : s) })),
+            deleteSolution: (solution: QuizSolution) => set((state) => ({ solutions: state.solutions.filter((s) => s.id !== solution.id) })),
         }),
         {
             name: "solutions"

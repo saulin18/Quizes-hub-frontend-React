@@ -24,7 +24,7 @@ export interface Quiz {
 export interface QuizSolution {
     id: number;
     quiz_id: number;
-    user_id: number;
+    user_id?: number;
     content: string
-    created_at: string;
+    created_at?: string;
 }

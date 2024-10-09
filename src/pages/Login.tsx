@@ -21,8 +21,8 @@
     const LoginPage = () => {
     
         const navigate = useNavigate();
-        const { isAuth } = useAuthStore();
-        const setToken = useAuthStore((state) => state.setToken);
+        const { isAuth, setToken } = useAuthStore();
+        
     
         const [username, setUsername] = useState("");
         const [password, setPassword] = useState("");

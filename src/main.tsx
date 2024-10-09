@@ -12,6 +12,7 @@ import Register from "./pages/Register";
 import QuizesPage from "./pages/QuizesPage";
 import QuizCreate from "./pages/QuizCreate";
 import CreateSolution from "./pages/CreateSolution";
+import DeleteSolution from './pages/DeleteSolution';
 
 const router = createBrowserRouter([
   {
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
       {
         path: "/quizes/solutions/:id",
         element: <CreateSolution />,
+      },
+      {
+        path: "/quizes/solutions/delete/:id",
+        element: <DeleteSolution />,
       }
     ],
     
