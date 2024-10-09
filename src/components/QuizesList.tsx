@@ -9,7 +9,6 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import SolutionItem from './SolutionItem';
 import { useSolutionsStore } from '../store/solutions';
-import { useNavigate } from 'react-router-dom';
 
 const QuizList: React.FC = () => {
   const { quizes, updateQuizeByWinnerSolution } = useQuizesStore();
@@ -21,18 +20,16 @@ const QuizList: React.FC = () => {
     queryFn: getQuizesRequest,
   });
   
-  const navigate = useNavigate();
-
   const { solutions, deleteSolution } = useSolutionsStore();
 
   const updateQuizByWinner = async (quiz_id: number, winner_solution_id: number) => {
     const updatedQuiz = await updateQuizByWinnerRequest(quiz_id, winner_solution_id);
     updateQuizeByWinnerSolution(updatedQuiz.id, winner_solution_id);
-    navigate(0)
+    refetch()
 };
 
 
-  const { isLoading: isLoadingSolutions, error: solutionsError, data: solutionsData } = useQuery<QuizSolution[], Error>({
+  const { isLoading: isLoadingSolutions, error: solutionsError, data: solutionsData, refetch } = useQuery<QuizSolution[], Error>({
     queryKey: ['get-solutions', selectedQuizId],
     queryFn: getQuizSolutionsRequest,
     enabled: !!selectedQuizId,
@@ -44,7 +41,7 @@ const QuizList: React.FC = () => {
     onSuccess: (data: QuizSolution) => {
       deleteSolution(data); 
       console.log(data)
-      navigate(0)
+      refetch()
      
     },
   });
@@ -76,7 +73,7 @@ const QuizList: React.FC = () => {
             <QuizItem quiz={quiz} />
            
             
-            <button onClick={() => setShowSolutions(true)} className="text-red-500">
+            <button onClick={() => setShowSolutions(true)} className="text-red-500 mb-4">
              Ver soluciones
             </button>
             {selectedQuizId === quiz.id && isLoadingSolutions && <Loader />}

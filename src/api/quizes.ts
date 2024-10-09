@@ -14,6 +14,6 @@ export const createQuizeRequest = async (quiz: { title: string; description: str
   };
   
   export const updateQuizByWinnerRequest = async (quiz_id: number, winner_solution_id: number): Promise<Quiz> => {
-    const response = await authAxios.put(`/quizes/update/${quiz_id}/`, { solution_id: winner_solution_id });
+    const response = await authAxios.put(`/quizes/update/${quiz_id}/`, { solution_id: winner_solution_id }); 
     return response.data; 
 };
