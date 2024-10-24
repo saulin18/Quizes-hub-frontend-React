@@ -10,18 +10,18 @@ const QuizItem: React.FC<QuizItemProps> = ({ quiz }) => {
   const winningSolution = quiz.solutions.find(solution => solution.id === quiz.winner_solution);
 
   return (
-    <Card sx={{ marginBottom: 2 }}>
-      <CardContent>
+    <Card sx={{ marginBottom: 2, paddingBottom: 2, boxShadow: 4, maxHeight: 550, width: 350, justifyContent: 'center' }}>
+      <CardContent  className="max-w-[35rem]">
         <Typography variant="h5" component="div" gutterBottom>
           {quiz.title}
         </Typography>
         <Typography variant="body2" color="text.secondary" gutterBottom>
-          {quiz.description}
+          <b>{quiz.description}</b>
         </Typography>
 
         {winningSolution && (
-          <Typography variant="body2" color="text.secondary" gutterBottom>
-            Solución Ganadora: {winningSolution.content}
+          <Typography variant="body2" color="text.secondary" gutterBottom paddingBottom={4}>
+            Solución Ganadora: <br/> <b>{winningSolution.content}</b>
           </Typography>
         )}
       </CardContent>

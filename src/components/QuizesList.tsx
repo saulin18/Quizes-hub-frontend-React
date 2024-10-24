@@ -53,7 +53,7 @@ const QuizList: React.FC = () => {
   }
 
   if (quizError) {
-    return <p>Error al cargar los quizzes: {quizError.message}</p>;
+    return <p className='text-red-800 text-xl'>Error al cargar los quizzes: {quizError.message}</p>;
   }
 
   const quizzesToMap = quizzesData as Quiz[] || quizes;
@@ -65,43 +65,51 @@ const QuizList: React.FC = () => {
   };
 
   if (solutionsError) {
-    return <p>Error al cargar las soluciones: {solutionsError.message}</p>;
+    return <p className='text-red-800 text-xl'>Error al cargar las soluciones: {solutionsError.message}</p>;
   }
 
   return (
     <>
-      <div>
+      <section>
         {quizzesToMap.map((quiz: Quiz) => (
-          <div key={quiz.id} onClick={() => setSelectedQuizId(quiz.id)}>
+          <article className='flex flex-col items-center justify-center' key={quiz.id} onClick={() => setSelectedQuizId(quiz.id)}>
             <QuizItem quiz={quiz} />
            
             
-            <button onClick={() => setShowSolutions(true)} className="text-red-500 mb-4">
+           {quiz.solutions.length > 0 && !showSolutions && <button onClick={() => setShowSolutions(true)} className="text-red-500 mb-4">
              Ver soluciones
-            </button>
+            </button> }
+            {showSolutions && <button onClick={() => setShowSolutions(false)} className="text-red-500 mb-4">
+              Ocultar soluciones
+              </button>}
+           
             {selectedQuizId === quiz.id && isLoadingSolutions && <Loader />}
+            {selectedQuizId === quiz.id && quiz.solutions.length === 0 && <p className='text-red-800 text-xl'>No hay soluciones para este quiz</p> }
             {selectedQuizId === quiz.id && solutionsError && <p>Error al cargar las soluciones</p>}
             {selectedQuizId === quiz.id && showSolutions && solutionsToMap && (
               <div>
                  
                 {solutionsToMap.map(solution => (
-                  <div key={solution.id}>
+                  <article className='gap-4 mt flex flex-col pt-4 items-center' key={solution.id}>
                     <SolutionItem solution={solution} />
-                    { quiz.winner_solution === solution.id && <p className='text-primary-800'>Esta es la solución ganadora: {solution.content}</p>}
-                    <button onClick={() => handleDelete(solution)} className="text-primary-500 mx-4 my-5 bg-slate-600 border-none rounded-lg px-4">
+                    { quiz.winner_solution === solution.id && 
+                    <p className='text-primary-800'>Esta es la solución ganadora:
+                     <br/>{solution.content}
+                     </p>}
+                    <button onClick={() => handleDelete(solution)} className="text-primary-50  bg-slate-600 border-none rounded-lg px-4">
                       Eliminar Solución
                     </button>
-                    <button onClick={() => updateQuizByWinner(quiz.id, solution.id)} className="text-primary-500 mx-4 my-5 bg-slate-600 border-none rounded-lg px-4">
+                    <button onClick={() => updateQuizByWinner(quiz.id, solution.id)} className="text-primary-50 mb-4 bg-slate-600 border-none rounded-lg px-4">
                       Elige una solución ganadora
                     </button>
-                  </div>
+                  </article>
                 ))}
                  
               </div>
             )}
-          </div>
+          </article>
         ))}
-      </div>
+      </section>
       <Link to="/quizes/create" className="text-center text-xl font-bold text-primary-800">
         Create Quiz
       </Link>
