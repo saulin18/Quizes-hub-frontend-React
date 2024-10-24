@@ -21,6 +21,6 @@ export const loginRequest = async (username: string, password: string) => {
         return response.data;
     } catch (error) {
         console.error("Error en loginRequest:", error);
-        throw error; 
+        
     }
 };
