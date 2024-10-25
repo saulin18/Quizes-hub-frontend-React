@@ -10,6 +10,7 @@ import { useState } from 'react';
 import SolutionItem from './SolutionItem';
 import { useSolutionsStore } from '../store/solutions';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'sonner';
 
 const QuizList: React.FC = () => {
   const { quizes, updateQuizeByWinnerSolution } = useQuizesStore();
@@ -24,11 +25,12 @@ const QuizList: React.FC = () => {
   const { solutions, deleteSolution } = useSolutionsStore();
   const navigate = useNavigate();
 
+
   const updateQuizByWinner = async (quiz_id: number, winner_solution_id: number) => {
     const updatedQuiz = await updateQuizByWinnerRequest(quiz_id, winner_solution_id);
     updateQuizeByWinnerSolution(updatedQuiz.id, winner_solution_id);
     navigate(0)
-    
+    toast.success('La solución ha sido seleccionada como ganadora');
 };
 
 
@@ -46,6 +48,9 @@ const QuizList: React.FC = () => {
       console.log(data)
       navigate(0)
       
+    },
+    onError: (error: Error) => {
+      toast.error(error.message);
     },
   });
   if (isLoadingQuizzes) {
