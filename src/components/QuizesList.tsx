@@ -27,10 +27,16 @@ const QuizList: React.FC = () => {
 
 
   const updateQuizByWinner = async (quiz_id: number, winner_solution_id: number) => {
-    const updatedQuiz = await updateQuizByWinnerRequest(quiz_id, winner_solution_id);
-    updateQuizeByWinnerSolution(updatedQuiz.id, winner_solution_id);
-    navigate(0)
-    toast.success('La solución ha sido seleccionada como ganadora');
+    try {
+      const updatedQuiz = await updateQuizByWinnerRequest(quiz_id, winner_solution_id);
+      updateQuizeByWinnerSolution(updatedQuiz.id, winner_solution_id);
+      navigate(0)
+      toast.success('La solución ha sido seleccionada como ganadora');
+    } catch (error: any) {
+      toast.error('Hubo un error, intenta de nuevo');
+      console.log(error)
+      toast.error(error.message);
+    }
 };
 
 
@@ -51,6 +57,7 @@ const QuizList: React.FC = () => {
     },
     onError: (error: Error) => {
       toast.error(error.message);
+      console.log(error)
     },
   });
   if (isLoadingQuizzes) {

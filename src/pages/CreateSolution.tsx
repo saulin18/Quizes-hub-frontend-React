@@ -19,8 +19,8 @@ const CreateSolution = () => {
       toast.success("Solución creada con éxito!");
       navigate("/quizes/");
     },
-    onError: () => {
-      toast.error("Hubo un error, intenta de nuevo");
+    onError: (error) => {
+      toast.error("Hubo un error, intenta de nuevo, error: " + error.message);
     },
   });
 
